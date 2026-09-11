@@ -1,4 +1,4 @@
-# Write your MySQL query statement below
+/* Write your PL/SQL query statement below */
 select p.product_id,
 coalesce(round(sum(p.price*u.units)/sum(u.units),2),0) as average_price
 from Prices p
