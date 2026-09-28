@@ -1,27 +1,31 @@
-import java.util.*;
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        HashMap<Integer, Integer> set = new HashMap<>(); // changed
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
 
-        for (int i = 0; i < nums1.length; i++) {
-            set.put(nums1[i], set.getOrDefault(nums1[i], 0) + 1); // changed
-        }
+        ArrayList<Integer> list = new ArrayList<>();
 
-        List<Integer> helper = new ArrayList<>();
-        int count = 0;
+        int i = 0;
+        int j = 0;
 
-        for (int i = 0; i < nums2.length; i++) {
-            if (set.containsKey(nums2[i]) && set.get(nums2[i]) > 0) { // changed
-                helper.add(nums2[i]);
-                set.put(nums2[i], set.get(nums2[i]) - 1); // fixed
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] == nums2[j]) {
+                list.add(nums1[i]);
+                i++;
+                j++;
+            } 
+            else if (nums1[i] < nums2[j]) {
+                i++;
+            } 
+            else {
+                j++;
             }
         }
 
-        int size = helper.size();
-        int ans[] = new int[size];
+        int[] ans = new int[list.size()];
 
-        for (int i = 0; i < size; i++) {
-            ans[i] = helper.get(i);
+        for (int k = 0; k < list.size(); k++) {
+            ans[k] = list.get(k);
         }
 
         return ans;
